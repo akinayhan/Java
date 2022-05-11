@@ -1,5 +1,4 @@
 package kodlamaio.northwind.business.concretes;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +44,13 @@ public class ProductManager implements ProductService{
 	@Override
 	public DataResult<Product> getByProductName(String productName) {
 		return new SuccessDataResult<Product>
-		(this.productDao.getByProductName(productName),"Data listelendi");
+		(this.productDao.getByProductName(productName),"Data listelendi");	
 	}
 
 	@Override
 	public DataResult<Product> getByProductNameAndCategoryId(String productName, int categoryId) {
 		//business codes
+		
 		return new SuccessDataResult<Product>
 		(this.productDao.getByProductNameAndCategory_CategoryId(productName,categoryId),"Data listelendi");
 	}
@@ -88,7 +88,7 @@ public class ProductManager implements ProductService{
 	@Override
 	public DataResult<List<Product>> getAll(int pageNo, int pageSize) {
 		
-		Pageable pageable = PageRequest.of(pageNo, pageSize);
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
 		
 		return new SuccessDataResult<List<Product>>
 		(this.productDao.findAll(pageable).getContent());
@@ -104,7 +104,7 @@ public class ProductManager implements ProductService{
 	@Override
 	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
 		return new SuccessDataResult<List<ProductWithCategoryDto>>
-		(this.productDao.getProductWithCategoryDetails(),"Data listelendi");
+		(this.productDao.getProductWithCategoryDetails(),"Data listelendi");		
 	}
 
 }
